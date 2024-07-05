@@ -1,4 +1,4 @@
-Sure, here's the corrected README with the formulas written in a way that will display properly on GitHub:
+باشه، اینجا نسخه‌ی به‌روزشده‌ی README بدون جمله‌ی "رید می" است:
 
 ---
 
