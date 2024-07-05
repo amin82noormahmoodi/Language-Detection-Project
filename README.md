@@ -1,17 +1,24 @@
-Sure, here's the README file for your project in English:
+Sure, I'll add detailed mathematical explanations for each of the three methods: GRU-based RNN, BERT-based Transformer, and the overall framework of token classification. 
 
 ---
 
 # Language Identification (LID) using RNN and Transformer Models
 
-This repository contains two approaches for Language Identification (LID) tasks:
+This repository contains three approaches for Language Identification (LID) tasks:
 1. **RNN-based model using GRU**
 2. **Transformer-based model using BERT**
+3. **Overall Token Classification Framework**
 
 ## Table of Contents
 1. [Dataset](#dataset)
 2. [RNN-based Model](#rnn-based-model)
+   - [Preprocessing](#preprocessing)
+   - [Model Architecture](#model-architecture)
+   - [Mathematical Explanation](#mathematical-explanation)
 3. [Transformer-based Model](#transformer-based-model)
+   - [Preprocessing](#preprocessing-1)
+   - [Model Architecture](#model-architecture-1)
+   - [Mathematical Explanation](#mathematical-explanation-1)
 4. [Training and Evaluation](#training-and-evaluation)
 5. [Results](#results)
 6. [Requirements](#requirements)
@@ -27,7 +34,7 @@ Both datasets include text samples and their corresponding language labels.
 
 ## RNN-based Model
 
-The RNN model is implemented using Gated Recurrent Units (GRU). Below is a summary of the model and the data preprocessing steps:
+The RNN model is implemented using Gated Recurrent Units (GRU). Below is a summary of the model, the data preprocessing steps, and the mathematical explanation.
 
 ### Preprocessing
 
@@ -45,17 +52,40 @@ The RNN model is implemented using Gated Recurrent Units (GRU). Below is a summa
 
 ### Model Architecture
 
-- Embedding layer
-- GRU layer (bidirectional)
-- Linear layer for classification
+- **Embedding layer**: Converts n-gram tokens into dense vectors.
+- **GRU layer (bidirectional)**: Processes the sequence of embeddings to capture contextual information.
+- **Linear layer for classification**: Outputs the language prediction probabilities.
 
-### Training and Evaluation
+### Mathematical Explanation
 
-The model is trained using the AdamW optimizer and CrossEntropyLoss. The training and evaluation functions handle the forward pass, loss computation, backpropagation, and accuracy calculation.
+#### Embedding Layer
+
+Given an input sequence of tokens \(\{x_1, x_2, \ldots, x_T\}\), the embedding layer maps each token \(x_t\) to a dense vector \(e_t \in \mathbb{R}^d\).
+
+et=Embedding(xt) e_t = \text{Embedding}(x_t) 
+
+#### GRU Layer
+
+The GRU layer processes the sequence of embeddings \(\{e_1, e_2, \ldots, e_T\}\) and computes hidden states \(\{h_1, h_2, \ldots, h_T\}\). For a bidirectional GRU, we have forward and backward passes:
+
+\[ h_t^{\text{fwd}} = \text{GRU}_{\text{fwd}}(e_t, h_{t-1}^{\text{fwd}}) \]
+\[ h_t^{\text{bwd}} = \text{GRU}_{\text{bwd}}(e_t, h_{t+1}^{\text{bwd}}) \]
+
+The final hidden state is a concatenation of forward and backward hidden states:
+
+\[ h_t = [h_t^{\text{fwd}}; h_t^{\text{bwd}}] \]
+
+#### Linear Layer for Classification
+
+The concatenated hidden state \(h_t\) is passed through a linear layer followed by a softmax activation to obtain the probability distribution over language labels:
+
+\[ y_t = \text{Softmax}(W h_t + b) \]
+
+where \(W\) and \(b\) are learnable parameters.
 
 ## Transformer-based Model
 
-The Transformer model uses BERT (bert-base-multilingual-cased) for token classification.
+The Transformer model uses BERT (bert-base-multilingual-cased) for token classification. Below is a summary of the model, the data preprocessing steps, and the mathematical explanation.
 
 ### Preprocessing
 
@@ -68,11 +98,50 @@ The Transformer model uses BERT (bert-base-multilingual-cased) for token classif
 
 ### Model Architecture
 
-- BERT for token classification with 10 output labels (languages).
+- **BERT for token classification**: The BERT model processes the input tokens and outputs contextualized embeddings.
+- **Classification Layer**: Outputs the language prediction probabilities for each token.
 
-### Training and Evaluation
+### Mathematical Explanation
 
-The model is trained using the `Trainer` class from the Transformers library. Training arguments are set for learning rate, batch size, number of epochs, and other hyperparameters. Evaluation metrics include precision, recall, F1 score, and accuracy.
+#### Tokenization and Embeddings
+
+Given an input sequence of tokens \(\{x_1, x_2, \ldots, x_T\}\), the BERT tokenizer maps each token to an embedding \(e_t \in \mathbb{R}^d\):
+
+\[ e_t = \text{BERT\_Embedding}(x_t) \]
+
+#### Transformer Encoder
+
+The Transformer encoder processes the sequence of embeddings \(\{e_1, e_2, \ldots, e_T\}\) using self-attention and feedforward layers to compute contextualized embeddings \(\{h_1, h_2, \ldots, h_T\}\).
+
+For each layer in the Transformer:
+
+1. **Self-Attention**:
+   
+   The self-attention mechanism computes a weighted sum of the input embeddings, where the weights are derived from the input itself:
+
+   \[ \text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) V \]
+
+   where \(Q, K, V\) are the query, key, and value matrices derived from the input embeddings.
+
+2. **Feedforward Network**:
+   
+   The feedforward network applies two linear transformations with a ReLU activation in between:
+
+   \[ \text{FFN}(h) = \text{ReLU}(W_1 h + b_1) W_2 + b_2 \]
+
+#### Classification Layer
+
+The final contextualized embeddings \(h_t\) are passed through a linear layer followed by a softmax activation to obtain the probability distribution over language labels for each token:
+
+\[ y_t = \text{Softmax}(W h_t + b) \]
+
+## Training and Evaluation
+
+Both models are trained using the AdamW optimizer and CrossEntropyLoss. The training and evaluation functions handle the forward pass, loss computation, backpropagation, and accuracy calculation.
+
+### Evaluation Metrics
+
+The evaluation metrics include precision, recall, F1 score, and accuracy. These metrics are computed using the seqeval library for the token classification task.
 
 ## Results
 
@@ -130,3 +199,4 @@ Training logs and results will be available in the console and TensorBoard.
 ---
 
 This README provides an overview of the project, including the dataset, model architectures, training procedures, and results. Follow the instructions to reproduce the experiments and achieve similar results.
+
