@@ -1,4 +1,4 @@
-Sure, I'll add detailed mathematical explanations for each of the three methods: GRU-based RNN, BERT-based Transformer, and the overall framework of token classification. 
+Understood. For GitHub Markdown, inline formulas should be wrapped in single dollar signs `$`, and block formulas should be wrapped in double dollar signs `$$`. Here's the corrected README with the proper formatting for mathematical expressions:
 
 ---
 
@@ -60,28 +60,28 @@ The RNN model is implemented using Gated Recurrent Units (GRU). Below is a summa
 
 #### Embedding Layer
 
-Given an input sequence of tokens \(\{x_1, x_2, \ldots, x_T\}\), the embedding layer maps each token \(x_t\) to a dense vector \(e_t \in \mathbb{R}^d\).
+Given an input sequence of tokens {x1,x2,…,xT}\{x_1, x_2, \ldots, x_T\}, the embedding layer maps each token xtx_t to a dense vector et∈Rde_t \in \mathbb{R}^d.
 
 et=Embedding(xt) e_t = \text{Embedding}(x_t) 
 
 #### GRU Layer
 
-The GRU layer processes the sequence of embeddings \(\{e_1, e_2, \ldots, e_T\}\) and computes hidden states \(\{h_1, h_2, \ldots, h_T\}\). For a bidirectional GRU, we have forward and backward passes:
+The GRU layer processes the sequence of embeddings {e1,e2,…,eT}\{e_1, e_2, \ldots, e_T\} and computes hidden states {h1,h2,…,hT}\{h_1, h_2, \ldots, h_T\}. For a bidirectional GRU, we have forward and backward passes:
 
-\[ h_t^{\text{fwd}} = \text{GRU}_{\text{fwd}}(e_t, h_{t-1}^{\text{fwd}}) \]
-\[ h_t^{\text{bwd}} = \text{GRU}_{\text{bwd}}(e_t, h_{t+1}^{\text{bwd}}) \]
+$$ h_t^{\text{fwd}} = \text{GRU}_{\text{fwd}}(e_t, h_{t-1}^{\text{fwd}}) $$
+$$ h_t^{\text{bwd}} = \text{GRU}_{\text{bwd}}(e_t, h_{t+1}^{\text{bwd}}) $$
 
 The final hidden state is a concatenation of forward and backward hidden states:
 
-\[ h_t = [h_t^{\text{fwd}}; h_t^{\text{bwd}}] \]
+$$ h_t = [h_t^{\text{fwd}}; h_t^{\text{bwd}}] $$
 
 #### Linear Layer for Classification
 
-The concatenated hidden state \(h_t\) is passed through a linear layer followed by a softmax activation to obtain the probability distribution over language labels:
+The concatenated hidden state $h_t$ is passed through a linear layer followed by a softmax activation to obtain the probability distribution over language labels:
 
-\[ y_t = \text{Softmax}(W h_t + b) \]
+$$ y_t = \text{Softmax}(W h_t + b) $$
 
-where \(W\) and \(b\) are learnable parameters.
+where $W$ and $b$ are learnable parameters.
 
 ## Transformer-based Model
 
@@ -105,13 +105,13 @@ The Transformer model uses BERT (bert-base-multilingual-cased) for token classif
 
 #### Tokenization and Embeddings
 
-Given an input sequence of tokens \(\{x_1, x_2, \ldots, x_T\}\), the BERT tokenizer maps each token to an embedding \(e_t \in \mathbb{R}^d\):
+Given an input sequence of tokens $\{x_1, x_2, \ldots, x_T\}$, the BERT tokenizer maps each token to an embedding $e_t \in \mathbb{R}^d$:
 
-\[ e_t = \text{BERT\_Embedding}(x_t) \]
+$$ e_t = \text{BERT\_Embedding}(x_t) $$
 
 #### Transformer Encoder
 
-The Transformer encoder processes the sequence of embeddings \(\{e_1, e_2, \ldots, e_T\}\) using self-attention and feedforward layers to compute contextualized embeddings \(\{h_1, h_2, \ldots, h_T\}\).
+The Transformer encoder processes the sequence of embeddings $\{e_1, e_2, \ldots, e_T\}$ using self-attention and feedforward layers to compute contextualized embeddings $\{h_1, h_2, \ldots, h_T\}$.
 
 For each layer in the Transformer:
 
@@ -119,21 +119,21 @@ For each layer in the Transformer:
    
    The self-attention mechanism computes a weighted sum of the input embeddings, where the weights are derived from the input itself:
 
-   \[ \text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) V \]
+   $$ \text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) V $$
 
-   where \(Q, K, V\) are the query, key, and value matrices derived from the input embeddings.
+   where $Q, K, V$ are the query, key, and value matrices derived from the input embeddings.
 
 2. **Feedforward Network**:
    
    The feedforward network applies two linear transformations with a ReLU activation in between:
 
-   \[ \text{FFN}(h) = \text{ReLU}(W_1 h + b_1) W_2 + b_2 \]
+   $$ \text{FFN}(h) = \text{ReLU}(W_1 h + b_1) W_2 + b_2 $$
 
 #### Classification Layer
 
-The final contextualized embeddings \(h_t\) are passed through a linear layer followed by a softmax activation to obtain the probability distribution over language labels for each token:
+The final contextualized embeddings $h_t$ are passed through a linear layer followed by a softmax activation to obtain the probability distribution over language labels for each token:
 
-\[ y_t = \text{Softmax}(W h_t + b) \]
+$$ y_t = \text{Softmax}(W h_t + b) $$
 
 ## Training and Evaluation
 
@@ -199,4 +199,3 @@ Training logs and results will be available in the console and TensorBoard.
 ---
 
 This README provides an overview of the project, including the dataset, model architectures, training procedures, and results. Follow the instructions to reproduce the experiments and achieve similar results.
-
