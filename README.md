@@ -1,3 +1,5 @@
+Understood. Here are the corrected formulas formatted for GitHub Markdown:
+
 ---
 
 # Language Identification (LID) using RNN and Transformer Models
@@ -58,13 +60,13 @@ The RNN model is implemented using Gated Recurrent Units (GRU). Below is a summa
 
 #### Embedding Layer
 
-Given an input sequence of tokens {x1,x2,…,xT}\{x_1, x_2, \ldots, x_T\}, the embedding layer maps each token xtx_t to a dense vector et∈Rde_t \in \mathbb{R}^d.
+Given an input sequence of tokens $\{x_1, x_2, \ldots, x_T\}$, the embedding layer maps each token $x_t$ to a dense vector $e_t \in \mathbb{R}^d$.
 
-et=Embedding(xt) e_t = \text{Embedding}(x_t) 
+$$ e_t = \text{Embedding}(x_t) $$
 
 #### GRU Layer
 
-The GRU layer processes the sequence of embeddings {e1,e2,…,eT}\{e_1, e_2, \ldots, e_T\} and computes hidden states {h1,h2,…,hT}\{h_1, h_2, \ldots, h_T\}. For a bidirectional GRU, we have forward and backward passes:
+The GRU layer processes the sequence of embeddings $\{e_1, e_2, \ldots, e_T\}$ and computes hidden states $\{h_1, h_2, \ldots, h_T\}$. For a bidirectional GRU, we have forward and backward passes:
 
 $$ h_t^{\text{fwd}} = \text{GRU}_{\text{fwd}}(e_t, h_{t-1}^{\text{fwd}}) $$
 $$ h_t^{\text{bwd}} = \text{GRU}_{\text{bwd}}(e_t, h_{t+1}^{\text{bwd}}) $$
