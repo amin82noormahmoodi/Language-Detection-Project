@@ -1,5 +1,3 @@
-Understood. For GitHub Markdown, inline formulas should be wrapped in single dollar signs `$`, and block formulas should be wrapped in double dollar signs `$$`. Here's the corrected README with the proper formatting for mathematical expressions:
-
 ---
 
 # Language Identification (LID) using RNN and Transformer Models
@@ -81,7 +79,7 @@ The concatenated hidden state $h_t$ is passed through a linear layer followed by
 
 $$ y_t = \text{Softmax}(W h_t + b) $$
 
-where $W$ and $b$ are learnable parameters.
+where $W$ and `b` are learnable parameters.
 
 ## Transformer-based Model
 
