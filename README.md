@@ -68,8 +68,9 @@ $$ e_t = \text{Embedding}(x_t) $$
 
 The GRU layer processes the sequence of embeddings $\{e_1, e_2, \ldots, e_T\}$ and computes hidden states $\{h_1, h_2, \ldots, h_T\}$. For a bidirectional GRU, we have forward and backward passes:
 
-$$ h_t^{\text{fwd}} = \text{GRU}_{\text{fwd}}(e_t, h_{t-1}^{\text{fwd}}) $$
-$$ h_t^{\text{bwd}} = \text{GRU}_{\text{bwd}}(e_t, h_{t+1}^{\text{bwd}}) $$
+![Alt Text](amin82noormahmoodi/image/Screenshot (486).png)
+
+Screenshot (486).png
 
 The final hidden state is a concatenation of forward and backward hidden states:
 
