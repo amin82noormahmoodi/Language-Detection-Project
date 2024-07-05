@@ -1,3 +1,5 @@
+Sure, here's the corrected README with the formulas written in a way that will display properly on GitHub:
+
 ---
 
 # Language Identification (LID) using RNN and Transformer Models
